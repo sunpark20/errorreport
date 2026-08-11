@@ -1,95 +1,247 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "apps": [
     {
       "id": "breaklock-timer",
       "display_name": "Breaklock Timer",
+      "display_name_ko": "Breaklock Timer",
+      "tagline_ko": "쉬는 시간에는 화면을 잠그는 포모도로 타이머",
       "platforms": [
         "macos"
       ],
+      "min_os": "macOS 12.0+",
+      "version": "1.9.0",
+      "status": "released",
+      "downloads": [
+        {
+          "platform": "macos",
+          "url": "https://apps.apple.com/app/id6770569966"
+        }
+      ],
+      "web": {
+        "privacy": "https://homeninja.vercel.app/privacy",
+        "support": "https://homeninja.vercel.app/privacy"
+      },
       "report_template": "breaklock-timer-bug.yml",
       "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=breaklock-timer-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
     },
     {
       "id": "callninja",
       "display_name": "CallNinja - Spam Call Blocker",
+      "display_name_ko": "콜닌자 - 스팸 전화 패턴 차단",
+      "tagline_ko": "번호 범위를 직접 지정해서 차단",
       "platforms": [
         "ios"
       ],
+      "min_os": "iOS 16.0+",
+      "version": "1.1",
+      "status": "released",
+      "downloads": [
+        {
+          "platform": "ios",
+          "url": "https://apps.apple.com/app/id6762523084"
+        }
+      ],
+      "web": {
+        "privacy": "https://homeninja.vercel.app/privacy/callninja",
+        "support": "https://homeninja.vercel.app/privacy/callninja"
+      },
       "report_template": "callninja-bug.yml",
       "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=callninja-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
     },
     {
       "id": "centuryiris",
       "display_name": "Century Iris",
+      "display_name_ko": "Century Iris",
+      "tagline_ko": "MacBook 조도센서로 외장 모니터 밝기와 색온도를 자동 조절합니다",
       "platforms": [
         "macos"
       ],
+      "min_os": "macOS 15.0+, Apple Silicon",
+      "version": "1.1",
+      "status": "released",
+      "downloads": [
+        {
+          "platform": "macos",
+          "url": "https://apps.apple.com/app/id6763940089"
+        }
+      ],
+      "web": {
+        "privacy": "https://homeninja.vercel.app/privacy",
+        "support": "https://homeninja.vercel.app/privacy"
+      },
       "report_template": "centuryiris-bug.yml",
       "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=centuryiris-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
     },
     {
       "id": "earth",
       "display_name": "Earth: World Time & Sky",
+      "display_name_ko": "Earth: 세계 시간과 하늘",
+      "tagline_ko": "지구본 위에서 세계 시간을 읽는 앱",
       "platforms": [
         "ios"
       ],
+      "min_os": "iOS 17.0+",
+      "version": "1.0.0",
+      "status": "unreleased",
+      "downloads": [],
+      "web": {
+        "privacy": "https://homeninja.vercel.app/privacy/earth",
+        "support": "https://homeninja.vercel.app/support/earth"
+      },
       "report_template": "earth-bug.yml",
       "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=earth-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
     },
     {
       "id": "eatwater",
       "display_name": "The Bird That Drinks Water",
+      "display_name_ko": "물을 마시는 새",
+      "tagline_ko": "물 마시는 시간을 알려주는 새",
       "platforms": [
         "ios"
       ],
+      "min_os": "iOS 26.0+",
+      "version": "1.0",
+      "status": "unreleased",
+      "downloads": [],
+      "web": {
+        "privacy": "https://homeninja.vercel.app/privacy/eatwater",
+        "support": "https://homeninja.vercel.app/support/eatwater"
+      },
       "report_template": "eatwater-bug.yml",
       "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=eatwater-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
     },
     {
       "id": "gnomon",
       "display_name": "Gnomon",
+      "display_name_ko": "Gnomon",
+      "tagline_ko": "MacBook 조도센서로 외장 모니터 밝기를 자동으로 맞춰줍니다",
       "platforms": [
         "macos"
       ],
+      "min_os": "macOS 15.0+, Apple Silicon",
+      "version": "1.8.0",
+      "status": "released",
+      "downloads": [
+        {
+          "platform": "macos",
+          "url": "https://github.com/sunpark20/gnomon/releases/tag/v1.8.0"
+        }
+      ],
+      "web": {
+        "privacy": null,
+        "support": null
+      },
       "report_template": "gnomon-bug.yml",
       "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=gnomon-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
     },
     {
       "id": "memory-palace",
       "display_name": "기억의궁전 뇌모닉",
+      "display_name_ko": "기억의궁전 뇌모닉",
+      "tagline_ko": "장소기억법을 배우는 뇌모닉 앱",
       "platforms": [
         "ios",
         "android"
       ],
+      "min_os": "iOS 17.0+, Android 7.0+",
+      "version": "2.0.1",
+      "status": "released",
+      "downloads": [
+        {
+          "platform": "ios",
+          "url": "https://apps.apple.com/app/id6758509388"
+        },
+        {
+          "platform": "android",
+          "url": "https://play.google.com/store/apps/details?id=hungry.ex_frag"
+        }
+      ],
+      "web": {
+        "privacy": "https://unruly-basil-c5e.notion.site/30b8253479f680079c88f13dd03c1172",
+        "support": "https://sunpark20.github.io/"
+      },
       "report_template": "memory-palace-bug.yml",
       "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=memory-palace-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
     },
     {
       "id": "snapcart",
       "display_name": "SnapCart Grocery Calculator",
+      "display_name_ko": "찰칵 장값 계산기",
+      "tagline_ko": "가격표만 찍으면 장바구니 자동 합산",
       "platforms": [
         "ios"
       ],
+      "min_os": "iOS 18.0+",
+      "version": "2.02",
+      "status": "released",
+      "downloads": [
+        {
+          "platform": "ios",
+          "url": "https://apps.apple.com/app/id6763238313"
+        }
+      ],
+      "web": {
+        "privacy": "https://homeninja.vercel.app/privacy",
+        "support": "https://homeninja.vercel.app/privacy"
+      },
       "report_template": "snapcart-bug.yml",
       "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=snapcart-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
     },
     {
       "id": "spamcall070",
       "display_name": "SpamCall070",
+      "display_name_ko": "070 스팸 전화 차단",
+      "tagline_ko": "최초 1회 설정으로 벨소리도 울리지 않게 차단",
       "platforms": [
         "ios"
       ],
+      "min_os": "iOS 16.0+",
+      "version": "1.4",
+      "status": "released",
+      "downloads": [
+        {
+          "platform": "ios",
+          "url": "https://apps.apple.com/app/id6762326707"
+        }
+      ],
+      "web": {
+        "privacy": "https://homeninja.vercel.app/privacy/spamcall070",
+        "support": "https://homeninja.vercel.app/privacy/spamcall070"
+      },
       "report_template": "spamcall070-bug.yml",
       "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=spamcall070-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
     },
     {
       "id": "yt-bulk-downloader",
       "display_name": "YT Chita",
+      "display_name_ko": "YT Chita",
+      "tagline_ko": "YouTube 채널·재생목록·개별 영상을 저장하는 데스크톱 앱",
       "platforms": [
         "macos",
         "windows"
       ],
+      "min_os": "macOS 10.15+, Windows 10·11 64-bit",
+      "version": "1.5.0",
+      "status": "released",
+      "downloads": [
+        {
+          "platform": "macos",
+          "url": "https://github.com/sunpark20/YT-Chita/releases/latest"
+        },
+        {
+          "platform": "windows",
+          "url": "https://github.com/sunpark20/YT-Chita/releases/latest"
+        },
+        {
+          "platform": "web",
+          "url": "https://sunpark20.github.io/YT-Chita/"
+        }
+      ],
+      "web": {
+        "privacy": "https://sunpark20.github.io/YT-Chita/#privacy",
+        "support": "https://sunpark20.github.io/YT-Chita/#contact"
+      },
       "report_template": "yt-bulk-downloader-bug.yml",
       "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=yt-bulk-downloader-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
     }

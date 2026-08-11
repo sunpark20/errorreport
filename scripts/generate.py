@@ -38,6 +38,9 @@ COMMON_LABELS = (
     "status:needs-triage",
     "type:bug",
 )
+VALID_PLATFORMS = frozenset({"android", "ios", "macos", "web", "windows"})
+VALID_STATUSES = frozenset({"released", "retired", "unreleased"})
+PRIVATE_MARKERS = ("jangbogo", "restlocktimer", "ytninza", "YT-Chita-source-archive")
 README_SECTION = re.compile(
     r"(## 신고하기 / Report a bug\n).*?(?=\n## 공개 범위 / Public visibility)",
     re.DOTALL,
@@ -51,6 +54,11 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=DEFAULT_SHIPPING_ROOT,
         help="directory containing one shipping.yml per app",
+    )
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="verify generated artifacts are current without writing them",
     )
     return parser.parse_args()
 
@@ -71,10 +79,30 @@ def require_string(value: Any, label: str) -> str:
     return value.strip()
 
 
+def optional_string(value: Any, label: str) -> str | None:
+    if value is None:
+        return None
+    return require_string(value, label)
+
+
 def require_strings(value: Any, label: str) -> list[str]:
     if not isinstance(value, list) or not value:
         fail(f"{label} must be a non-empty list")
     return [require_string(item, f"{label} item") for item in value]
+
+
+def public_urls(value: Any, label: str) -> dict[str, str]:
+    if value is None:
+        return {}
+    urls = require_mapping(value, label)
+    result: dict[str, str] = {}
+    for platform, url in urls.items():
+        if platform not in VALID_PLATFORMS:
+            fail(f"{label}.{platform} is not a supported platform")
+        normalized = optional_string(url, f"{label}.{platform}")
+        if normalized is not None:
+            result[platform] = normalized
+    return result
 
 
 def load_apps(shipping_root: Path) -> list[dict[str, Any]]:
@@ -92,12 +120,54 @@ def load_apps(shipping_root: Path) -> list[dict[str, Any]]:
 
         app = require_mapping(data.get("app"), f"{manifest}: app")
         reporting = require_mapping(data.get("reporting"), f"{manifest}: reporting")
+        platforms = require_strings(app.get("platforms"), f"{manifest}: app.platforms")
+        if any(platform not in VALID_PLATFORMS for platform in platforms):
+            fail(f"{manifest}: app.platforms contains an unsupported platform")
+
+        if schema_version == 2:
+            web = require_mapping(data.get("web"), f"{manifest}: web")
+            status = require_string(app.get("status"), f"{manifest}: app.status")
+            if status not in VALID_STATUSES:
+                fail(f"{manifest}: app.status must be one of {sorted(VALID_STATUSES)}")
+            display_name_ko = require_string(app.get("display_name_ko"), f"{manifest}: app.display_name_ko")
+            tagline_ko = require_string(app.get("tagline_ko"), f"{manifest}: app.tagline_ko")
+            min_os = require_string(app.get("min_os"), f"{manifest}: app.min_os")
+            version = require_string(app.get("version"), f"{manifest}: app.version")
+            privacy_url = optional_string(web.get("privacy"), f"{manifest}: web.privacy")
+            support_url = optional_string(web.get("support"), f"{manifest}: web.support")
+            store_urls = public_urls(data.get("store"), f"{manifest}: store")
+            release_urls = public_urls(data.get("release"), f"{manifest}: release")
+        else:
+            display_name_ko = require_string(app.get("display_name"), f"{manifest}: app.display_name")
+            tagline_ko = None
+            min_os = None
+            version = None
+            status = None
+            privacy_url = None
+            support_url = None
+            store_urls = {}
+            release_urls = {}
+
+        downloads = [
+            {"platform": platform, "url": store_urls.get(platform) or release_urls.get(platform)}
+            for platform in platforms
+            if store_urls.get(platform) or release_urls.get(platform)
+        ]
+        if release_urls.get("web"):
+            downloads.append({"platform": "web", "url": release_urls["web"]})
         apps.append(
             {
                 "id": require_string(app.get("id"), f"{manifest}: app.id"),
                 "display_name": require_string(app.get("display_name"), f"{manifest}: app.display_name"),
-                "platforms": require_strings(app.get("platforms"), f"{manifest}: app.platforms"),
+                "display_name_ko": display_name_ko,
+                "tagline_ko": tagline_ko,
+                "platforms": platforms,
                 "bundle_ids": require_strings(app.get("bundle_ids"), f"{manifest}: app.bundle_ids"),
+                "min_os": min_os,
+                "version": version,
+                "status": status,
+                "downloads": downloads,
+                "web": {"privacy": privacy_url, "support": support_url},
                 "template": require_string(reporting.get("template"), f"{manifest}: reporting.template"),
                 "locales": require_strings(reporting.get("locales"), f"{manifest}: reporting.locales"),
             }
@@ -139,12 +209,12 @@ def form_context(app: dict[str, Any]) -> dict[str, Any]:
         "public_warning_en": "This issue and its attachments are **public**. Do not include phone numbers, email addresses, real names, raw logs, user file paths, or device identifiers.",
         "public_warning_ko": "이 이슈와 첨부 파일은 **공개**됩니다. 전화번호, 이메일, 실명, 원본 로그, 사용자 파일 경로, 기기 식별자를 포함하지 마세요.",
         "screenshots_description": "개인정보를 가린 뒤 첨부해 주세요. Redact personal information before uploading.",
-        "version_placeholder": "1.0",
+        "version_placeholder": app.get("version") or "1.0",
         "what_happened_placeholder": "문제를 설명해 주세요. / Describe the problem.",
     }
 
     if app["id"] == "gnomon":
-        context.update(version_placeholder="1.7.2", os_placeholder="macOS 15.6")
+        context.update(os_placeholder="macOS 15.6")
     elif app["id"] == "spamcall070":
         warning = "이 이슈와 첨부 파일은 **공개**됩니다. 차단되지 않은 실제 전화번호, 이메일, 실명, 원본 로그, 사용자 파일 경로, 기기 식별자를 포함하지 마세요."
         context.update(
@@ -154,7 +224,6 @@ def form_context(app: dict[str, Any]) -> dict[str, Any]:
             privacy_ack_label="이 신고가 공개되며 실제 전화번호나 민감정보를 포함하지 않았음을 확인합니다. / I understand this report is public and contains no real phone numbers or sensitive information.",
             public_warning_en="This issue and its attachments are **public**. Do not include real phone numbers, email addresses, real names, raw logs, user file paths, or device identifiers.",
             screenshots_description="전화번호와 개인정보를 가린 뒤 첨부해 주세요. Redact phone numbers and personal information before uploading.",
-            version_placeholder="1.3",
             what_happened_placeholder="실제 전화번호는 일부를 가려 주세요. / Redact any real phone numbers.",
         )
         context["public_warning_ko"] = warning
@@ -194,13 +263,25 @@ def render_apps_json(apps: list[dict[str, Any]]) -> str:
         {
             "id": app["id"],
             "display_name": app["display_name"],
+            "display_name_ko": app["display_name_ko"],
+            "tagline_ko": app["tagline_ko"],
             "platforms": app["platforms"],
+            "min_os": app["min_os"],
+            "version": app["version"],
+            "status": app["status"],
+            "downloads": app["downloads"],
+            "web": app["web"],
             "report_template": app["template"],
             "report_url": report_url(app["template"]),
         }
         for app in apps
     ]
-    return json.dumps({"schema_version": 1, "apps": public_apps}, ensure_ascii=False, indent=2) + "\n"
+    public_payload = {"schema_version": 2, "apps": public_apps}
+    public_text = json.dumps(public_payload, ensure_ascii=False)
+    for marker in PRIVATE_MARKERS:
+        if marker.lower() in public_text.lower():
+            fail(f"apps.json would expose private identifier {marker}")
+    return json.dumps(public_payload, ensure_ascii=False, indent=2) + "\n"
 
 
 def render_labels(apps: list[dict[str, Any]]) -> str:
@@ -234,18 +315,35 @@ def main() -> None:
     apps = load_apps(args.shipping_root.resolve())
     forms = render_forms(apps)
 
-    for filename, contents in forms.items():
-        write(REPOSITORY_ROOT / ".github" / "ISSUE_TEMPLATE" / filename, contents)
-    write(REPOSITORY_ROOT / "apps.json", render_apps_json(apps))
-    write(REPOSITORY_ROOT / "labels.txt", render_labels(apps))
-
     readme_path = REPOSITORY_ROOT / "README.md"
     readme = readme_path.read_text(encoding="utf-8")
     updated_readme, replacements = README_SECTION.subn(render_readme(apps), readme)
     if replacements != 1:
         fail("README.md must contain exactly one report section before public visibility")
-    write(readme_path, updated_readme)
 
+    outputs = {
+        **{
+            REPOSITORY_ROOT / ".github" / "ISSUE_TEMPLATE" / filename: contents
+            for filename, contents in forms.items()
+        },
+        REPOSITORY_ROOT / "apps.json": render_apps_json(apps),
+        REPOSITORY_ROOT / "labels.txt": render_labels(apps),
+        readme_path: updated_readme,
+    }
+
+    if args.check:
+        stale = [
+            str(path.relative_to(REPOSITORY_ROOT))
+            for path, contents in outputs.items()
+            if not path.exists() or path.read_text(encoding="utf-8") != contents
+        ]
+        if stale:
+            fail(f"generated artifacts are out of date: {', '.join(stale)}")
+        print(f"verified {len(forms)} issue forms from {args.shipping_root}")
+        return
+
+    for path, contents in outputs.items():
+        write(path, contents)
     print(f"generated {len(forms)} issue forms from {args.shipping_root}")
 
 
