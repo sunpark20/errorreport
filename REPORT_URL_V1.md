@@ -21,14 +21,11 @@ https://github.com/sunpark20/errorreport/issues/new
 - 앱 버전이나 OS를 읽지 못하면 빈 문자열 대신 `unknown`을 사용한다.
 - 전화번호, 이메일, 사용자 파일 경로, 기기 이름·시리얼, 원본 로그는 자동 입력하지 않는다.
 
-## Email fallback
+## 비GitHub 사용자
 
-- 받는 주소: `coastguard2681@gmail.com`
-- 제목: `[{app-id}] 오류 신고 / Bug report`
-- 본문 순서: 발생한 문제, 재현 방법, 예상 결과, 앱 정보, 선택적 진단 요약
-- GitHub URL과 동일한 앱 메타데이터를 사용하되 사용자가 내용을 수정한 뒤 전송한다.
+오류 신고는 GitHub Issue Form 한 경로로만 받습니다. GitHub 계정이 필요할 수 있습니다.
 
-메일 앱을 열 수 없으면 주소와 본문을 클립보드에 복사하고 사용자에게 알린다.
+App Store 리뷰와 TestFlight 피드백은 개발자가 별도로 확인할 수 있는 보조 감지 채널일 뿐, 사용자를 안내하는 신고 경로가 아닙니다.
 
 ## `shipping.yml` schema v1
 
@@ -45,3 +42,7 @@ reporting:
 ```
 
 `app.id`는 디렉터리명이나 GitHub 저장소명에서 추론하지 않는다. 향후 생성기는 `shipping.yml`이 있는 앱만 수집하며, 공개 산출물에는 로컬 경로나 비공개 저장소 origin을 포함하지 않는다.
+
+## 변경 이력
+
+- v1.1 — 이메일 폴백 제거

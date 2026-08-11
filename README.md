@@ -20,8 +20,8 @@ Issues and attachments here are public. Do not include:
 - 영수증, 계정 정보 또는 API 키 / receipts, account information, or API keys
 - 원본 로그, 사용자 파일 경로 또는 기기 식별자 / raw logs, user file paths, or device identifiers
 
-민감한 정보가 필요한 신고는 앱의 **메일로 신고 / Report by Email** 버튼을 사용하고, 가능한 범위에서 정보를 가려 주세요.
-For reports requiring sensitive details, use the in-app email fallback and redact as much as possible.
+민감정보는 가린 뒤 공개 이슈에 올리거나 App Store 리뷰로 알려 주세요.
+Redact sensitive data before filing a public issue, or let us know in an App Store review.
 
 ## 처리 방식 / What happens next
 
