@@ -201,7 +201,10 @@ def form_context(app: dict[str, Any]) -> dict[str, Any]:
 
     context = {
         "app": app,
-        "build_placeholder": "1",
+        # A build number is supplied by the app's report URL at runtime.  A
+        # generated form must not advertise a stale, app-specific fallback
+        # when it is opened directly instead.
+        "build_placeholder": "unknown",
         "device_placeholder": device_placeholder,
         "diagnostics_description": "선택 사항입니다. 개인정보나 원본 로그를 넣지 마세요. Optional; do not include personal data or raw logs.",
         "os_placeholder": os_placeholder,
@@ -218,7 +221,6 @@ def form_context(app: dict[str, Any]) -> dict[str, Any]:
     elif app["id"] == "spamcall070":
         warning = "이 이슈와 첨부 파일은 **공개**됩니다. 차단되지 않은 실제 전화번호, 이메일, 실명, 원본 로그, 사용자 파일 경로, 기기 식별자를 포함하지 마세요."
         context.update(
-            build_placeholder="6",
             diagnostics_description="앱이 실패 블록 수와 오류 코드만 채웁니다. 실제 전화번호나 원본 로그를 추가하지 마세요.",
             os_placeholder="iOS 18.6",
             privacy_ack_label="이 신고가 공개되며 실제 전화번호나 민감정보를 포함하지 않았음을 확인합니다. / I understand this report is public and contains no real phone numbers or sensitive information.",
