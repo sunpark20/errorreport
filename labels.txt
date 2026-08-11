@@ -1,0 +1,14 @@
+app:breaklock-timer
+app:callninja
+app:centuryiris
+app:earth
+app:eatwater
+app:gnomon
+app:memory-palace
+app:snapcart
+app:spamcall070
+app:yt-bulk-downloader
+source:appstore
+source:github
+status:needs-triage
+type:bug

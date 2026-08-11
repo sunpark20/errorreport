@@ -1,0 +1,101 @@
+name: {{ (app.display_name ~ " 버그 신고 / Bug report") | q }}
+description: {{ (app.display_name ~ "에서 발생한 문제를 신고합니다. Report a problem in " ~ app.display_name ~ ".") | q }}
+title: {{ ("[" ~ app.display_name ~ "] ") | q }}
+labels:
+  - {{ ("app:" ~ app.id) | q }}
+  - "type:bug"
+  - "source:github"
+  - "status:needs-triage"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        {{ public_warning_ko }}
+
+        {{ public_warning_en }}
+
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: "발생한 문제 / What happened?"
+      description: "무엇을 하던 중 어떤 문제가 발생했는지 알려 주세요. Describe what you were doing and what went wrong."
+      placeholder: {{ what_happened_placeholder | q }}
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "재현 방법 / Steps to reproduce"
+      description: "재현할 수 없다면 '재현 불가'라고 적어 주세요. Write 'Cannot reproduce' if the steps are unknown."
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "예상 결과 / Expected behavior"
+      placeholder: "대신 어떤 결과를 예상했나요? / What did you expect instead?"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: "앱 버전 / App version"
+      placeholder: {{ version_placeholder | q }}
+    validations:
+      required: true
+
+  - type: input
+    id: build
+    attributes:
+      label: "빌드 / Build"
+      placeholder: {{ build_placeholder | q }}
+    validations:
+      required: false
+
+  - type: input
+    id: os
+    attributes:
+      label: "운영체제 / OS"
+      placeholder: {{ os_placeholder | q }}
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: "기기 종류 / Device type"
+      description: "기기 이름이나 시리얼이 아닌 일반 종류만 적어 주세요. Use a generic type, not a device name or serial."
+      placeholder: {{ device_placeholder | q }}
+    validations:
+      required: false
+
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: "추가 진단 요약 / Additional diagnostic summary"
+      description: {{ diagnostics_description | q }}
+    validations:
+      required: false
+
+  - type: upload
+    id: screenshots
+    attributes:
+      label: "스크린샷 / Screenshots"
+      description: {{ screenshots_description | q }}
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: privacy_ack
+    attributes:
+      label: "공개 범위 확인 / Public visibility acknowledgement"
+      options:
+        - label: {{ privacy_ack_label | q }}
+          required: true

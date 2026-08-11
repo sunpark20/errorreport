@@ -5,8 +5,18 @@ This repository is the public bug-reporting hub for apps published by Sunguk.
 
 ## 신고하기 / Report a bug
 
-- [Gnomon 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=gnomon-bug.yml)
-- [SpamCall070 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=spamcall070-bug.yml)
+<!-- BEGIN GENERATED REPORT LINKS -->
+- [Breaklock Timer 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=breaklock-timer-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
+- [CallNinja - Spam Call Blocker 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=callninja-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
+- [Century Iris 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=centuryiris-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
+- [Earth: World Time & Sky 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=earth-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
+- [The Bird That Drinks Water 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=eatwater-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
+- [Gnomon 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=gnomon-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
+- [기억의궁전 뇌모닉 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=memory-palace-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
+- [SnapCart Grocery Calculator 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=snapcart-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
+- [SpamCall070 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=spamcall070-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
+- [YT Chita 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=yt-bulk-downloader-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
+<!-- END GENERATED REPORT LINKS -->
 
 앱 안의 **GitHub에 신고 / Report on GitHub** 버튼을 사용하면 앱 버전과 운영체제 정보가 자동으로 채워집니다.
 Using the in-app report button pre-fills the app version and operating-system details.

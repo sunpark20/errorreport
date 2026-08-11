@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "apps": [
+    {
+      "id": "breaklock-timer",
+      "display_name": "Breaklock Timer",
+      "platforms": [
+        "macos"
+      ],
+      "report_template": "breaklock-timer-bug.yml",
+      "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=breaklock-timer-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    },
+    {
+      "id": "callninja",
+      "display_name": "CallNinja - Spam Call Blocker",
+      "platforms": [
+        "ios"
+      ],
+      "report_template": "callninja-bug.yml",
+      "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=callninja-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    },
+    {
+      "id": "centuryiris",
+      "display_name": "Century Iris",
+      "platforms": [
+        "macos"
+      ],
+      "report_template": "centuryiris-bug.yml",
+      "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=centuryiris-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    },
+    {
+      "id": "earth",
+      "display_name": "Earth: World Time & Sky",
+      "platforms": [
+        "ios"
+      ],
+      "report_template": "earth-bug.yml",
+      "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=earth-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    },
+    {
+      "id": "eatwater",
+      "display_name": "The Bird That Drinks Water",
+      "platforms": [
+        "ios"
+      ],
+      "report_template": "eatwater-bug.yml",
+      "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=eatwater-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    },
+    {
+      "id": "gnomon",
+      "display_name": "Gnomon",
+      "platforms": [
+        "macos"
+      ],
+      "report_template": "gnomon-bug.yml",
+      "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=gnomon-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    },
+    {
+      "id": "memory-palace",
+      "display_name": "기억의궁전 뇌모닉",
+      "platforms": [
+        "ios",
+        "android"
+      ],
+      "report_template": "memory-palace-bug.yml",
+      "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=memory-palace-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    },
+    {
+      "id": "snapcart",
+      "display_name": "SnapCart Grocery Calculator",
+      "platforms": [
+        "ios"
+      ],
+      "report_template": "snapcart-bug.yml",
+      "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=snapcart-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    },
+    {
+      "id": "spamcall070",
+      "display_name": "SpamCall070",
+      "platforms": [
+        "ios"
+      ],
+      "report_template": "spamcall070-bug.yml",
+      "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=spamcall070-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    },
+    {
+      "id": "yt-bulk-downloader",
+      "display_name": "YT Chita",
+      "platforms": [
+        "macos",
+        "windows"
+      ],
+      "report_template": "yt-bulk-downloader-bug.yml",
+      "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=yt-bulk-downloader-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    }
+  ]
+}

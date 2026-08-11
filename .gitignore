@@ -1,4 +1,5 @@
 su-whateffort.md
 .DS_Store
+__pycache__/
 에러리포트_계획.md
 에러리포트_프롬프트.md

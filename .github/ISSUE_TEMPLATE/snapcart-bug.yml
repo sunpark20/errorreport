@@ -1,0 +1,101 @@
+name: "SnapCart Grocery Calculator 버그 신고 / Bug report"
+description: "SnapCart Grocery Calculator에서 발생한 문제를 신고합니다. Report a problem in SnapCart Grocery Calculator."
+title: "[SnapCart Grocery Calculator] "
+labels:
+  - "app:snapcart"
+  - "type:bug"
+  - "source:github"
+  - "status:needs-triage"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        이 이슈와 첨부 파일은 **공개**됩니다. 전화번호, 이메일, 실명, 원본 로그, 사용자 파일 경로, 기기 식별자를 포함하지 마세요.
+
+        This issue and its attachments are **public**. Do not include phone numbers, email addresses, real names, raw logs, user file paths, or device identifiers.
+
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: "발생한 문제 / What happened?"
+      description: "무엇을 하던 중 어떤 문제가 발생했는지 알려 주세요. Describe what you were doing and what went wrong."
+      placeholder: "문제를 설명해 주세요. / Describe the problem."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "재현 방법 / Steps to reproduce"
+      description: "재현할 수 없다면 '재현 불가'라고 적어 주세요. Write 'Cannot reproduce' if the steps are unknown."
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "예상 결과 / Expected behavior"
+      placeholder: "대신 어떤 결과를 예상했나요? / What did you expect instead?"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: "앱 버전 / App version"
+      placeholder: "1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: build
+    attributes:
+      label: "빌드 / Build"
+      placeholder: "1"
+    validations:
+      required: false
+
+  - type: input
+    id: os
+    attributes:
+      label: "운영체제 / OS"
+      placeholder: "iOS 16.0"
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: "기기 종류 / Device type"
+      description: "기기 이름이나 시리얼이 아닌 일반 종류만 적어 주세요. Use a generic type, not a device name or serial."
+      placeholder: "iPhone"
+    validations:
+      required: false
+
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: "추가 진단 요약 / Additional diagnostic summary"
+      description: "선택 사항입니다. 개인정보나 원본 로그를 넣지 마세요. Optional; do not include personal data or raw logs."
+    validations:
+      required: false
+
+  - type: upload
+    id: screenshots
+    attributes:
+      label: "스크린샷 / Screenshots"
+      description: "개인정보를 가린 뒤 첨부해 주세요. Redact personal information before uploading."
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: privacy_ack
+    attributes:
+      label: "공개 범위 확인 / Public visibility acknowledgement"
+      options:
+        - label: "이 신고가 공개되며 민감정보를 포함하지 않았음을 확인합니다. / I understand this report is public and contains no sensitive information."
+          required: true
