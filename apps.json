@@ -129,8 +129,8 @@
         }
       ],
       "web": {
-        "privacy": null,
-        "support": null
+        "privacy": "https://homeninja.vercel.app/privacy/gnomon",
+        "support": "https://homeninja.vercel.app/support/gnomon"
       },
       "report_template": "gnomon-bug.yml",
       "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=gnomon-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
