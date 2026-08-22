@@ -30,7 +30,7 @@ App Store 리뷰와 TestFlight 피드백은 개발자가 별도로 확인할 수
 ## `shipping.yml` schema v2
 
 앱 정보의 유일한 원천은 각 앱 저장소의 `shipping.yml`이다. 생성기는 schema v1을 읽을 수는 있지만,
-현재 공개 레지스트리에 등재되는 10개 앱은 모두 아래 schema v2를 사용한다.
+현재 공개 레지스트리에 등재되는 12개 앱은 모두 아래 schema v2를 사용한다.
 
 ```yaml
 schema_version: 2
@@ -60,7 +60,7 @@ reporting:
 
 schema v2의 공개 필드에서 생성되는 산출물은 다음과 같다.
 
-- Issue Form 10개와 라벨 목록: `reporting`과 앱 표시 이름
+- Issue Form 12개와 라벨 목록: `reporting`과 앱 표시 이름
 - `apps.json`: 이름·한 줄 설명·플랫폼·최소 OS·버전·상태·다운로드·개인정보/지원 URL·신고 URL
 - HOMEninja `data/apps.generated.ts`: 위 공개 필드와 동일한 값
 

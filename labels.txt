@@ -5,9 +5,11 @@ app:earth
 app:eatwater
 app:gnomon
 app:memory-palace
+app:quick-quit
 app:snapcart
 app:spamcall070
 app:yt-bulk-downloader
+app:ytdi
 source:appstore
 source:github
 status:needs-triage

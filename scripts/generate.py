@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate public error-report artifacts from the ten local shipping manifests."""
+"""Generate public error-report artifacts from the twelve local shipping manifests."""
 
 from __future__ import annotations
 
@@ -27,9 +27,11 @@ EXPECTED_APP_IDS = frozenset(
         "eatwater",
         "gnomon",
         "memory-palace",
+        "quick-quit",
         "snapcart",
         "spamcall070",
         "yt-bulk-downloader",
+        "ytdi",
     }
 )
 COMMON_LABELS = (
@@ -175,7 +177,10 @@ def load_apps(shipping_root: Path) -> list[dict[str, Any]]:
 
     app_ids = {app["id"] for app in apps}
     if app_ids != EXPECTED_APP_IDS:
-        fail(f"app.id set does not match the approved ten apps: {sorted(app_ids)}")
+        fail(
+            f"app.id set does not match the approved {len(EXPECTED_APP_IDS)} apps: "
+            f"{sorted(app_ids)}"
+        )
     if len({app["template"] for app in apps}) != len(apps):
         fail("reporting.template values must be unique")
     if any(app["template"] != f"{app['id']}-bug.yml" for app in apps):
