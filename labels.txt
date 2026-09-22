@@ -1,3 +1,4 @@
+app:book
 app:breaklock-timer
 app:callninja
 app:centuryiris

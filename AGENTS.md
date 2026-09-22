@@ -14,6 +14,14 @@
 8. `SECURITY.md`의 비신뢰 입력과 maintainer 승인 게이트를 약화하거나 수정하지 않는다.
 9. 아래 로컬 작업 문서는 어떤 저장소에도 커밋하지 않는다.
 
+## ReportKit package
+
+`ReportKit` and `ReportKitUI` are public Swift Package products. The generated
+`Sources/ReportKit/ReportTargets.generated.swift` file is produced only by
+`uv run python scripts/generate.py` from the approved `shipping.yml` manifests.
+Keep the package URL contract aligned with the Issue Form field IDs and never
+add `labels` or `body` query parameters.
+
 ## 커밋 금지 로컬 문서
 
 - `에러리포트_계획.md`

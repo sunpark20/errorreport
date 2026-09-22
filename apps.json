@@ -2,6 +2,25 @@
   "schema_version": 2,
   "apps": [
     {
+      "id": "book",
+      "display_name": "Book",
+      "display_name_ko": "책기록",
+      "tagline_ko": "책을 검색하고 날짜별 기록을 남기는 독서 기록 앱",
+      "platforms": [
+        "ios"
+      ],
+      "min_os": "iOS 17.0+",
+      "version": "1.0.0",
+      "status": "unreleased",
+      "downloads": [],
+      "web": {
+        "privacy": "https://homeninja.vercel.app/privacy/book",
+        "support": "https://homeninja.vercel.app/support/book"
+      },
+      "report_template": "book-bug.yml",
+      "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=book-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    },
+    {
       "id": "breaklock-timer",
       "display_name": "Breaklock Timer",
       "display_name_ko": "Breaklock Timer",

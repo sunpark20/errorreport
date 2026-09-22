@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""Generate public error-report artifacts from the twelve local shipping manifests."""
+"""Generate the public error-report artifacts and ReportKit catalog."""
 
 from __future__ import annotations
 
 import argparse
 import json
 import re
-import sys
 from urllib.parse import urlencode
 from pathlib import Path
 from typing import Any
@@ -16,10 +15,12 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SHIPPING_ROOT = REPOSITORY_ROOT.parent / "0.shipping"
+DEFAULT_SHIPPING_ROOT = REPOSITORY_ROOT.parent.parent / "0.shipping"
+DEFAULT_SWIFT_OUTPUT = REPOSITORY_ROOT / "Sources" / "ReportKit" / "ReportTargets.generated.swift"
 ISSUE_URL = "https://github.com/sunpark20/errorreport/issues/new"
 EXPECTED_APP_IDS = frozenset(
     {
+        "book",
         "breaklock-timer",
         "callninja",
         "centuryiris",
@@ -43,6 +44,15 @@ COMMON_LABELS = (
 VALID_PLATFORMS = frozenset({"android", "ios", "macos", "web", "windows"})
 VALID_STATUSES = frozenset({"released", "retired", "unreleased"})
 PRIVATE_MARKERS = ("jangbogo", "restlocktimer", "ytninza", "YT-Chita-source-archive")
+SWIFT_KEYWORDS = {
+    "associatedtype", "class", "deinit", "enum", "extension", "fileprivate",
+    "func", "import", "init", "inout", "internal", "let", "open", "operator",
+    "private", "protocol", "public", "rethrows", "static", "struct", "subscript",
+    "typealias", "var", "break", "case", "continue", "default", "defer", "do",
+    "else", "fallthrough", "for", "guard", "if", "in", "repeat", "return",
+    "switch", "where", "while", "as", "catch", "false", "is", "nil", "super",
+    "self", "Self", "throw", "throws", "true", "try", "_",
+}
 README_SECTION = re.compile(
     r"(## 신고하기 / Report a bug\n).*?(?=\n## 공개 범위 / Public visibility)",
     re.DOTALL,
@@ -61,6 +71,12 @@ def parse_args() -> argparse.Namespace:
         "--check",
         action="store_true",
         help="verify generated artifacts are current without writing them",
+    )
+    parser.add_argument(
+        "--swift-output",
+        type=Path,
+        default=DEFAULT_SWIFT_OUTPUT,
+        help="generated ReportKit Swift catalog path",
     )
     return parser.parse_args()
 
@@ -223,6 +239,8 @@ def form_context(app: dict[str, Any]) -> dict[str, Any]:
 
     if app["id"] == "gnomon":
         context.update(os_placeholder="macOS 15.6")
+    elif app["id"] == "book":
+        context.update(os_placeholder="iOS 17.0")
     elif app["id"] == "spamcall070":
         warning = "이 이슈와 첨부 파일은 **공개**됩니다. 차단되지 않은 실제 전화번호, 이메일, 실명, 원본 로그, 사용자 파일 경로, 기기 식별자를 포함하지 마세요."
         context.update(
@@ -284,10 +302,6 @@ def render_apps_json(apps: list[dict[str, Any]]) -> str:
         for app in apps
     ]
     public_payload = {"schema_version": 2, "apps": public_apps}
-    public_text = json.dumps(public_payload, ensure_ascii=False)
-    for marker in PRIVATE_MARKERS:
-        if marker.lower() in public_text.lower():
-            fail(f"apps.json would expose private identifier {marker}")
     return json.dumps(public_payload, ensure_ascii=False, indent=2) + "\n"
 
 
@@ -295,6 +309,60 @@ def render_labels(apps: list[dict[str, Any]]) -> str:
     labels = [f"app:{app['id']}" for app in apps]
     labels.extend(COMMON_LABELS)
     return "\n".join(sorted(labels)) + "\n"
+
+
+def swift_property_name(app_id: str) -> str:
+    parts = [part for part in re.split(r"[^A-Za-z0-9]+", app_id) if part]
+    if not parts:
+        fail(f"cannot derive a Swift property name from app.id {app_id!r}")
+
+    name = parts[0].lower() + "".join(part[:1].upper() + part[1:] for part in parts[1:])
+    if name[0].isdigit() or name in SWIFT_KEYWORDS:
+        name = "app" + name[:1].upper() + name[1:]
+    return name
+
+
+def render_swift_targets(apps: list[dict[str, Any]]) -> str:
+    properties = [swift_property_name(app["id"]) for app in apps]
+    if len(set(properties)) != len(properties):
+        fail("generated Swift property names would collide")
+
+    lines = [
+        "// This file is generated from shipping.yml manifests.",
+        "// Run: uv run python scripts/generate.py",
+        "// Do not edit by hand.",
+        "",
+        "public enum ReportTargets {",
+    ]
+    for app, property_name in zip(apps, properties):
+        lines.extend(
+            [
+                f"    public static let {property_name} = ReportTarget(",
+                f"        appID: {json.dumps(app['id'], ensure_ascii=False)},",
+                f"        displayName: {json.dumps(app['display_name'], ensure_ascii=False)},",
+                f"        template: {json.dumps(app['template'], ensure_ascii=False)}",
+                "    )",
+                "",
+            ]
+        )
+
+    lines.append("    public static let all: [ReportTarget] = [")
+    lines.extend(f"        {property_name}," for property_name in properties)
+    lines.extend(["    ]", ""])
+    lines.extend([
+        "    public static func target(forAppID appID: String) -> ReportTarget? {",
+        "        switch appID {",
+    ])
+    for app, property_name in zip(apps, properties):
+        lines.append(f"        case {json.dumps(app['id'], ensure_ascii=False)}: return {property_name}")
+    lines.extend([
+        "        default: return nil",
+        "        }",
+        "    }",
+        "}",
+        "",
+    ])
+    return "\n".join(lines)
 
 
 def render_readme(apps: list[dict[str, Any]]) -> str:
@@ -317,9 +385,21 @@ def write(path: Path, contents: str) -> None:
     path.write_text(contents, encoding="utf-8")
 
 
+def validate_public_outputs(outputs: dict[Path, str]) -> None:
+    for path, contents in outputs.items():
+        lowered = contents.lower()
+        for marker in PRIVATE_MARKERS:
+            if marker.lower() in lowered:
+                fail(f"{path.relative_to(REPOSITORY_ROOT)} would expose private identifier {marker}")
+        if "mailto:" in lowered:
+            fail(f"{path.relative_to(REPOSITORY_ROOT)} would expose an email reporting path")
+
+
 def main() -> None:
     args = parse_args()
-    apps = load_apps(args.shipping_root.resolve())
+    shipping_root = args.shipping_root.expanduser().resolve()
+    swift_output = args.swift_output.expanduser().resolve()
+    apps = load_apps(shipping_root)
     forms = render_forms(apps)
 
     readme_path = REPOSITORY_ROOT / "README.md"
@@ -336,7 +416,9 @@ def main() -> None:
         REPOSITORY_ROOT / "apps.json": render_apps_json(apps),
         REPOSITORY_ROOT / "labels.txt": render_labels(apps),
         readme_path: updated_readme,
+        swift_output: render_swift_targets(apps),
     }
+    validate_public_outputs(outputs)
 
     if args.check:
         stale = [
@@ -346,12 +428,12 @@ def main() -> None:
         ]
         if stale:
             fail(f"generated artifacts are out of date: {', '.join(stale)}")
-        print(f"verified {len(forms)} issue forms from {args.shipping_root}")
+        print(f"verified {len(forms)} issue forms and ReportKit targets from {shipping_root}")
         return
 
     for path, contents in outputs.items():
         write(path, contents)
-    print(f"generated {len(forms)} issue forms from {args.shipping_root}")
+    print(f"generated {len(forms)} issue forms and ReportKit targets from {shipping_root}")
 
 
 if __name__ == "__main__":

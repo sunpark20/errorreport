@@ -6,6 +6,7 @@ This repository is the public bug-reporting hub for apps published by Sunguk.
 ## 신고하기 / Report a bug
 
 <!-- BEGIN GENERATED REPORT LINKS -->
+- [Book 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=book-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
 - [Breaklock Timer 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=breaklock-timer-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
 - [CallNinja - Spam Call Blocker 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=callninja-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
 - [Century Iris 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=centuryiris-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
@@ -39,3 +40,25 @@ Redact sensitive data before filing a public issue, or let us know in an App Sto
 
 신고는 사람이 먼저 확인합니다. 외부 사용자가 작성한 이슈만으로 코드 에이전트나 자동 수정이 실행되지 않습니다.
 Every report is reviewed by a person first. User-submitted content never triggers an automated coding agent by itself.
+
+## Swift Package / ReportKit
+
+이 저장소에는 앱에서 공개 GitHub Issue Form을 여는 `ReportKit`과 선택적인 SwiftUI 모듈 `ReportKitUI`가 포함되어 있습니다.
+The repository also ships the `ReportKit` Swift package and its optional `ReportKitUI` SwiftUI module.
+
+```swift
+import ReportKit
+
+let target = ReportTargets.gnomon
+if let link = target.github(metadata: .current()) {
+    ReportOpener.open(link)
+}
+```
+
+매니페스트를 변경한 뒤 모든 공개 산출물을 다시 생성하고 검증합니다.
+
+```sh
+uv run python scripts/generate.py
+uv run python scripts/generate.py --check
+swift test
+```
