@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 from urllib.parse import urlencode
 from pathlib import Path
@@ -64,7 +65,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--shipping-root",
         type=Path,
-        default=DEFAULT_SHIPPING_ROOT,
+        default=Path(os.environ["SHIPPING_ROOT"]) if os.environ.get("SHIPPING_ROOT") else DEFAULT_SHIPPING_ROOT,
         help="directory containing one shipping.yml per app",
     )
     parser.add_argument(
@@ -386,13 +387,19 @@ def write(path: Path, contents: str) -> None:
 
 
 def validate_public_outputs(outputs: dict[Path, str]) -> None:
+    def display_path(path: Path) -> str:
+        try:
+            return str(path.relative_to(REPOSITORY_ROOT))
+        except ValueError:
+            return str(path)
+
     for path, contents in outputs.items():
         lowered = contents.lower()
         for marker in PRIVATE_MARKERS:
             if marker.lower() in lowered:
-                fail(f"{path.relative_to(REPOSITORY_ROOT)} would expose private identifier {marker}")
+                fail(f"{display_path(path)} would expose private identifier {marker}")
         if "mailto:" in lowered:
-            fail(f"{path.relative_to(REPOSITORY_ROOT)} would expose an email reporting path")
+            fail(f"{display_path(path)} would expose an email reporting path")
 
 
 def main() -> None:

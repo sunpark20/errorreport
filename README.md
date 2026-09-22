@@ -58,7 +58,7 @@ if let link = target.github(metadata: .current()) {
 매니페스트를 변경한 뒤 모든 공개 산출물을 다시 생성하고 검증합니다.
 
 ```sh
-uv run python scripts/generate.py
-uv run python scripts/generate.py --check
+SHIPPING_ROOT=/path/to/shipping uv run python scripts/generate.py
+SHIPPING_ROOT=/path/to/shipping uv run python scripts/generate.py --check
 swift test
 ```
