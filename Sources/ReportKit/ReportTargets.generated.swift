@@ -77,7 +77,7 @@ public enum ReportTargets {
 
     public static let ytdi = ReportTarget(
         appID: "ytdi",
-        displayName: "ytdi",
+        displayName: "YTDI",
         template: "ytdi-bug.yml"
     )
 

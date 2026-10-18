@@ -10,9 +10,14 @@
         "ios"
       ],
       "min_os": "iOS 17.0+",
-      "version": "1.0.0",
-      "status": "unreleased",
-      "downloads": [],
+      "version": "1.0.2",
+      "status": "released",
+      "downloads": [
+        {
+          "platform": "ios",
+          "url": "https://apps.apple.com/app/id6814522901"
+        }
+      ],
       "web": {
         "privacy": "https://homeninja.vercel.app/privacy/book",
         "support": "https://homeninja.vercel.app/support/book"
@@ -29,7 +34,7 @@
         "macos"
       ],
       "min_os": "macOS 12.0+",
-      "version": "1.8.1",
+      "version": "1.9.1",
       "status": "released",
       "downloads": [
         {
@@ -102,8 +107,13 @@
       ],
       "min_os": "iOS 17.0+",
       "version": "1.0.0",
-      "status": "unreleased",
-      "downloads": [],
+      "status": "released",
+      "downloads": [
+        {
+          "platform": "ios",
+          "url": "https://apps.apple.com/app/id6800529221"
+        }
+      ],
       "web": {
         "privacy": "https://homeninja.vercel.app/privacy/earth",
         "support": "https://homeninja.vercel.app/support/earth"
@@ -120,9 +130,14 @@
         "ios"
       ],
       "min_os": "iOS 26.0+",
-      "version": "1.0",
-      "status": "unreleased",
-      "downloads": [],
+      "version": "1.2",
+      "status": "released",
+      "downloads": [
+        {
+          "platform": "ios",
+          "url": "https://apps.apple.com/app/id6791134733"
+        }
+      ],
       "web": {
         "privacy": "https://homeninja.vercel.app/privacy/eatwater",
         "support": "https://homeninja.vercel.app/support/eatwater"
@@ -285,16 +300,21 @@
     },
     {
       "id": "ytdi",
-      "display_name": "ytdi",
-      "display_name_ko": "ytdi",
-      "tagline_ko": "불안정한 회선에서도 이어받는 iPhone 영상 보관 앱",
+      "display_name": "YTDI",
+      "display_name_ko": "YTDI",
+      "tagline_ko": "불안정한 회선에서도 이어받는 iPhone 영상 보관 앱 · 사이드로드 공개 준비 중",
       "platforms": [
         "ios"
       ],
       "min_os": "iOS 26.0+",
       "version": "0.1.0",
       "status": "unreleased",
-      "downloads": [],
+      "downloads": [
+        {
+          "platform": "web",
+          "url": "https://github.com/sunpark20/ytdi-releases"
+        }
+      ],
       "web": {
         "privacy": "https://homeninja.vercel.app/privacy/ytdi",
         "support": "https://homeninja.vercel.app/support/ytdi"

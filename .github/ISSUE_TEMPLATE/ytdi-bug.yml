@@ -1,6 +1,6 @@
-name: "ytdi 버그 신고 / Bug report"
-description: "ytdi에서 발생한 문제를 신고합니다. Report a problem in ytdi."
-title: "[ytdi] "
+name: "YTDI 버그 신고 / Bug report"
+description: "YTDI에서 발생한 문제를 신고합니다. Report a problem in YTDI."
+title: "[YTDI] "
 labels:
   - "app:ytdi"
   - "type:bug"

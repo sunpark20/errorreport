@@ -16,7 +16,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SHIPPING_ROOT = REPOSITORY_ROOT.parent.parent / "0.shipping"
+DEFAULT_SHIPPING_ROOT = Path(os.environ.get("SHIPPING_ROOT", str(REPOSITORY_ROOT.parent.parent / "0.shipping")))
 DEFAULT_SWIFT_OUTPUT = REPOSITORY_ROOT / "Sources" / "ReportKit" / "ReportTargets.generated.swift"
 ISSUE_URL = "https://github.com/sunpark20/errorreport/issues/new"
 EXPECTED_APP_IDS = frozenset(
