@@ -6,6 +6,7 @@ This repository is the public bug-reporting hub for apps published by Sunguk.
 ## 신고하기 / Report a bug
 
 <!-- BEGIN GENERATED REPORT LINKS -->
+- [BIP-0039 Mnemonic 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=bip0039-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
 - [Book 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=book-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
 - [Breaklock Timer 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=breaklock-timer-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
 - [CallNinja - Spam Call Blocker 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=callninja-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
@@ -17,6 +18,7 @@ This repository is the public bug-reporting hub for apps published by Sunguk.
 - [Quick Quit 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=quick-quit-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
 - [SnapCart Grocery Calculator 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=snapcart-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
 - [SpamCall070 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=spamcall070-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
+- [오늘 열었을까 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=todayopen-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
 - [YT Chita 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=yt-bulk-downloader-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
 - [YTDI 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=ytdi-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
 <!-- END GENERATED REPORT LINKS -->

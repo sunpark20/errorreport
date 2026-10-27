@@ -3,6 +3,12 @@
 // Do not edit by hand.
 
 public enum ReportTargets {
+    public static let bip0039 = ReportTarget(
+        appID: "bip0039",
+        displayName: "BIP-0039 Mnemonic",
+        template: "bip0039-bug.yml"
+    )
+
     public static let book = ReportTarget(
         appID: "book",
         displayName: "Book",
@@ -69,6 +75,12 @@ public enum ReportTargets {
         template: "spamcall070-bug.yml"
     )
 
+    public static let todayopen = ReportTarget(
+        appID: "todayopen",
+        displayName: "오늘 열었을까",
+        template: "todayopen-bug.yml"
+    )
+
     public static let ytBulkDownloader = ReportTarget(
         appID: "yt-bulk-downloader",
         displayName: "YT Chita",
@@ -82,6 +94,7 @@ public enum ReportTargets {
     )
 
     public static let all: [ReportTarget] = [
+        bip0039,
         book,
         breaklockTimer,
         callninja,
@@ -93,12 +106,14 @@ public enum ReportTargets {
         quickQuit,
         snapcart,
         spamcall070,
+        todayopen,
         ytBulkDownloader,
         ytdi,
     ]
 
     public static func target(forAppID appID: String) -> ReportTarget? {
         switch appID {
+        case "bip0039": return bip0039
         case "book": return book
         case "breaklock-timer": return breaklockTimer
         case "callninja": return callninja
@@ -110,6 +125,7 @@ public enum ReportTargets {
         case "quick-quit": return quickQuit
         case "snapcart": return snapcart
         case "spamcall070": return spamcall070
+        case "todayopen": return todayopen
         case "yt-bulk-downloader": return ytBulkDownloader
         case "ytdi": return ytdi
         default: return nil

@@ -2,6 +2,30 @@
   "schema_version": 2,
   "apps": [
     {
+      "id": "bip0039",
+      "display_name": "BIP-0039 Mnemonic",
+      "display_name_ko": "BIP-0039 Mnemonic",
+      "tagline_ko": "오프라인에서 BIP-39 영문 단어를 찾아보는 앱",
+      "platforms": [
+        "ios"
+      ],
+      "min_os": "iOS 17.0+",
+      "version": "1.0",
+      "status": "unreleased",
+      "downloads": [
+        {
+          "platform": "ios",
+          "url": "https://apps.apple.com/app/id6827382555"
+        }
+      ],
+      "web": {
+        "privacy": "https://homeninja.vercel.app/privacy/bip0039",
+        "support": "https://homeninja.vercel.app/support/bip0039"
+      },
+      "report_template": "bip0039-bug.yml",
+      "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=bip0039-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    },
+    {
       "id": "book",
       "display_name": "Book",
       "display_name_ko": "책기록",
@@ -264,6 +288,25 @@
       },
       "report_template": "spamcall070-bug.yml",
       "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=spamcall070-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    },
+    {
+      "id": "todayopen",
+      "display_name": "오늘 열었을까",
+      "display_name_ko": "오늘 열었을까",
+      "tagline_ko": "자주 가는 장소의 오늘 운영 상태와 휴무 확인",
+      "platforms": [
+        "ios"
+      ],
+      "min_os": "iOS 17.0+",
+      "version": "1.0",
+      "status": "unreleased",
+      "downloads": [],
+      "web": {
+        "privacy": "https://homeninja.vercel.app/privacy/todayopen",
+        "support": "https://homeninja.vercel.app/support/todayopen"
+      },
+      "report_template": "todayopen-bug.yml",
+      "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=todayopen-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
     },
     {
       "id": "yt-bulk-downloader",

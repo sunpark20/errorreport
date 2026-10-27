@@ -21,6 +21,7 @@ DEFAULT_SWIFT_OUTPUT = REPOSITORY_ROOT / "Sources" / "ReportKit" / "ReportTarget
 ISSUE_URL = "https://github.com/sunpark20/errorreport/issues/new"
 EXPECTED_APP_IDS = frozenset(
     {
+        "bip0039",
         "book",
         "breaklock-timer",
         "callninja",
@@ -32,6 +33,7 @@ EXPECTED_APP_IDS = frozenset(
         "quick-quit",
         "snapcart",
         "spamcall070",
+        "todayopen",
         "yt-bulk-downloader",
         "ytdi",
     }

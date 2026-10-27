@@ -14,7 +14,7 @@ except ModuleNotFoundError:  # direct `python scripts/test_generate.py`
 class GeneratorTests(unittest.TestCase):
     def test_default_manifests_produce_the_approved_catalog(self):
         apps = generate.load_apps(generate.DEFAULT_SHIPPING_ROOT)
-        self.assertEqual(len(apps), 13)
+        self.assertEqual(len(apps), 15)
         self.assertEqual({app["id"] for app in apps}, generate.EXPECTED_APP_IDS)
 
     def test_report_urls_use_only_issue_form_fields(self):

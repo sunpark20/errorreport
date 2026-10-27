@@ -3,7 +3,7 @@ import XCTest
 
 final class GeneratedReportTargetsTests: XCTestCase {
     func testGeneratedCatalogContainsAllShippingTargets() {
-        XCTAssertEqual(ReportTargets.all.count, 13)
+        XCTAssertEqual(ReportTargets.all.count, 15)
         XCTAssertEqual(Set(ReportTargets.all.map(\.appID)).count, ReportTargets.all.count)
         XCTAssertEqual(Set(ReportTargets.all.map(\.template)).count, ReportTargets.all.count)
     }

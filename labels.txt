@@ -1,3 +1,4 @@
+app:bip0039
 app:book
 app:breaklock-timer
 app:callninja
@@ -9,6 +10,7 @@ app:memory-palace
 app:quick-quit
 app:snapcart
 app:spamcall070
+app:todayopen
 app:yt-bulk-downloader
 app:ytdi
 source:appstore
