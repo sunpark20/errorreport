@@ -17,6 +17,13 @@ class GeneratorTests(unittest.TestCase):
         self.assertEqual(len(apps), 15)
         self.assertEqual({app["id"] for app in apps}, generate.EXPECTED_APP_IDS)
 
+    def test_extra_manifest_preserves_existing_catalog(self):
+        original = generate.load_apps(generate.DEFAULT_SHIPPING_ROOT)
+        combined = generate.load_apps(generate.DEFAULT_SHIPPING_ROOT, generate.DEFAULT_EXTRA_MANIFESTS)
+        self.assertEqual(len(combined), 16)
+        self.assertEqual([app for app in combined if app["id"] != "longscreenshot"], original)
+        self.assertEqual(next(app for app in combined if app["id"] == "longscreenshot")["template"], "longscreenshot-bug.yml")
+
     def test_report_urls_use_only_issue_form_fields(self):
         url = generate.report_url("gnomon-bug.yml")
         query = dict(parse_qsl(urlsplit(url).query))

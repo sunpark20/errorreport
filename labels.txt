@@ -6,6 +6,7 @@ app:centuryiris
 app:earth
 app:eatwater
 app:gnomon
+app:longscreenshot
 app:memory-palace
 app:quick-quit
 app:snapcart

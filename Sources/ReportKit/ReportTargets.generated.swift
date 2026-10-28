@@ -51,6 +51,12 @@ public enum ReportTargets {
         template: "gnomon-bug.yml"
     )
 
+    public static let longscreenshot = ReportTarget(
+        appID: "longscreenshot",
+        displayName: "LongScreenshot",
+        template: "longscreenshot-bug.yml"
+    )
+
     public static let memoryPalace = ReportTarget(
         appID: "memory-palace",
         displayName: "기억의궁전 뇌모닉",
@@ -102,6 +108,7 @@ public enum ReportTargets {
         earth,
         eatwater,
         gnomon,
+        longscreenshot,
         memoryPalace,
         quickQuit,
         snapcart,
@@ -121,6 +128,7 @@ public enum ReportTargets {
         case "earth": return earth
         case "eatwater": return eatwater
         case "gnomon": return gnomon
+        case "longscreenshot": return longscreenshot
         case "memory-palace": return memoryPalace
         case "quick-quit": return quickQuit
         case "snapcart": return snapcart

@@ -194,6 +194,25 @@
       "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=gnomon-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
     },
     {
+      "id": "longscreenshot",
+      "display_name": "LongScreenshot",
+      "display_name_ko": "롱스크린샷",
+      "tagline_ko": "화면 기록을 긴 스크린샷으로 만듭니다.",
+      "platforms": [
+        "ios"
+      ],
+      "min_os": "iOS 17.0",
+      "version": "0.2.0",
+      "status": "unreleased",
+      "downloads": [],
+      "web": {
+        "privacy": null,
+        "support": null
+      },
+      "report_template": "longscreenshot-bug.yml",
+      "report_url": "https://github.com/sunpark20/errorreport/issues/new?template=longscreenshot-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown"
+    },
+    {
       "id": "memory-palace",
       "display_name": "기억의궁전 뇌모닉",
       "display_name_ko": "기억의궁전 뇌모닉",

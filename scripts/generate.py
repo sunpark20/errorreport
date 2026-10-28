@@ -19,6 +19,8 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SHIPPING_ROOT = Path(os.environ.get("SHIPPING_ROOT", str(REPOSITORY_ROOT.parent.parent / "0.shipping")))
 DEFAULT_SWIFT_OUTPUT = REPOSITORY_ROOT / "Sources" / "ReportKit" / "ReportTargets.generated.swift"
 ISSUE_URL = "https://github.com/sunpark20/errorreport/issues/new"
+DEFAULT_EXTRA_MANIFESTS = (REPOSITORY_ROOT.parent.parent / "longscreenshot" / "shipping.yml",)
+EXTRA_APP_IDS = frozenset({"longscreenshot"})
 EXPECTED_APP_IDS = frozenset(
     {
         "bip0039",
@@ -81,6 +83,7 @@ def parse_args() -> argparse.Namespace:
         default=DEFAULT_SWIFT_OUTPUT,
         help="generated ReportKit Swift catalog path",
     )
+    parser.add_argument("--extra-manifest", type=Path, action="append", help="additional approved shipping.yml outside shipping-root (repeatable)")
     return parser.parse_args()
 
 
@@ -126,11 +129,12 @@ def public_urls(value: Any, label: str) -> dict[str, str]:
     return result
 
 
-def load_apps(shipping_root: Path) -> list[dict[str, Any]]:
+def load_apps(shipping_root: Path, extra_manifests: tuple[Path, ...] = ()) -> list[dict[str, Any]]:
     manifests = sorted(shipping_root.glob("*/shipping.yml"))
     if len(manifests) != len(EXPECTED_APP_IDS):
         fail(f"expected {len(EXPECTED_APP_IDS)} shipping.yml files, found {len(manifests)}")
 
+    manifests.extend(extra_manifests)
     apps: list[dict[str, Any]] = []
     for manifest in manifests:
         raw = yaml.safe_load(manifest.read_text(encoding="utf-8"))
@@ -195,7 +199,10 @@ def load_apps(shipping_root: Path) -> list[dict[str, Any]]:
         )
 
     app_ids = {app["id"] for app in apps}
-    if app_ids != EXPECTED_APP_IDS:
+    expected_ids = EXPECTED_APP_IDS | (EXTRA_APP_IDS if extra_manifests else frozenset())
+    if len(app_ids) != len(apps):
+        fail("app.id values must be unique")
+    if app_ids != expected_ids:
         fail(
             f"app.id set does not match the approved {len(EXPECTED_APP_IDS)} apps: "
             f"{sorted(app_ids)}"
@@ -408,7 +415,8 @@ def main() -> None:
     args = parse_args()
     shipping_root = args.shipping_root.expanduser().resolve()
     swift_output = args.swift_output.expanduser().resolve()
-    apps = load_apps(shipping_root)
+    extras = tuple(path.expanduser().resolve() for path in (args.extra_manifest or DEFAULT_EXTRA_MANIFESTS))
+    apps = load_apps(shipping_root, extras)
     forms = render_forms(apps)
 
     readme_path = REPOSITORY_ROOT / "README.md"

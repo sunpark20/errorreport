@@ -3,7 +3,7 @@ import XCTest
 
 final class GeneratedReportTargetsTests: XCTestCase {
     func testGeneratedCatalogContainsAllShippingTargets() {
-        XCTAssertEqual(ReportTargets.all.count, 15)
+        XCTAssertEqual(ReportTargets.all.count, 16)
         XCTAssertEqual(Set(ReportTargets.all.map(\.appID)).count, ReportTargets.all.count)
         XCTAssertEqual(Set(ReportTargets.all.map(\.template)).count, ReportTargets.all.count)
     }
@@ -13,6 +13,7 @@ final class GeneratedReportTargetsTests: XCTestCase {
         XCTAssertEqual(ReportTargets.target(forAppID: "book"), ReportTargets.book)
         XCTAssertEqual(ReportTargets.target(forAppID: "memory-palace"), ReportTargets.memoryPalace)
         XCTAssertEqual(ReportTargets.target(forAppID: "yt-bulk-downloader"), ReportTargets.ytBulkDownloader)
+        XCTAssertEqual(ReportTargets.target(forAppID: "longscreenshot"), ReportTargets.longscreenshot)
         XCTAssertNil(ReportTargets.target(forAppID: "not-a-real-app"))
     }
 

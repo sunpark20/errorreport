@@ -14,6 +14,7 @@ This repository is the public bug-reporting hub for apps published by Sunguk.
 - [Earth: World Time & Sky 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=earth-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
 - [The Bird That Drinks Water 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=eatwater-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
 - [Gnomon 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=gnomon-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
+- [LongScreenshot 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=longscreenshot-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
 - [기억의궁전 뇌모닉 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=memory-palace-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
 - [Quick Quit 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=quick-quit-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
 - [SnapCart Grocery Calculator 버그 신고 / Bug report](https://github.com/sunpark20/errorreport/issues/new?template=snapcart-bug.yml&version=unknown&build=unknown&os=unknown&device=unknown&diagnostics=unknown)
@@ -64,3 +65,7 @@ SHIPPING_ROOT=/path/to/shipping uv run python scripts/generate.py
 SHIPPING_ROOT=/path/to/shipping uv run python scripts/generate.py --check
 swift test
 ```
+
+### Additional source manifests
+
+The generator includes the approved LongScreenshot `shipping.yml` alongside the original 15 shipping apps. Use `--extra-manifest /path/to/shipping.yml` when the source checkout is elsewhere; this option is repeatable. The same manifest set generates the Issue Form, app catalog, labels, README links, and Swift targets. `--check` verifies all of them together.
